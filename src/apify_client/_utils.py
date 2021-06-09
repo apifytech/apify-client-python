@@ -145,7 +145,7 @@ def _encode_webhook_list_to_base64(webhooks: List[Dict]) -> bytes:
             webhook_representation['payloadTemplate'] = webhook['payload_template']
         data.append(webhook_representation)
 
-    return base64.b64encode(json.dumps(data).encode("utf-8"))
+    return base64.b64encode(json.dumps(data).encode('utf-8'))
 
 
 def _filter_out_none_values(dictionary: Dict) -> Dict:
@@ -182,9 +182,9 @@ def _snake_case_to_camel_case(str_snake_case: str) -> str:
     >>> _snake_case_to_camel_case("making_the_WEB_programmable")
     'makingTheWebProgrammable'
     """
-    return "".join([
+    return ''.join([
         part.capitalize() if i > 0 else part
-        for i, part in enumerate(str_snake_case.split("_"))
+        for i, part in enumerate(str_snake_case.split('_'))
     ])
 
 
@@ -198,7 +198,7 @@ def _encode_key_value_store_record_value(value: Any, content_type: Optional[str]
             content_type = 'application/json; charset=utf-8'
 
     if 'application/json' in content_type and not _is_file_or_bytes(value) and not isinstance(value, str):
-        value = json.dumps(value, ensure_ascii=False, indent=2).encode("utf-8")
+        value = json.dumps(value, ensure_ascii=False, indent=2).encode('utf-8')
 
     return (value, content_type)
 

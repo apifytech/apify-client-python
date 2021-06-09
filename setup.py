@@ -56,6 +56,7 @@ setup(
             'flake8-commas ~= 2.0.0',
             'flake8-docstrings ~= 1.6.0',
             'flake8-isort ~= 4.0.0',
+            'flake8-quotes ~= 3.2.0',
             'isort ~= 5.8.0',
             'mypy ~= 0.901',
             'pep8-naming ~= 0.11.1',

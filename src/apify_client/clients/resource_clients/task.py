@@ -53,13 +53,13 @@ class TaskClient(ResourceClient):
             dict: The updated task
         """
         updated_fields = {
-            "name": name,
-            "options": {
-                "build": build,
-                "memoryMbytes": memory_mbytes,
-                "timeoutSecs": timeout_secs,
+            'name': name,
+            'options': {
+                'build': build,
+                'memoryMbytes': memory_mbytes,
+                'timeoutSecs': timeout_secs,
             },
-            "input": task_input,
+            'input': task_input,
         }
 
         return self._update(_filter_out_none_values_recursively(updated_fields))

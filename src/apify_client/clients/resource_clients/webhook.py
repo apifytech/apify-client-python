@@ -21,7 +21,7 @@ def _prepare_webhook_representation(
     """Prepare webhook dictionary representation for clients."""
     webhook: Dict[str, Any] = {
         _snake_case_to_camel_case(key): value
-        for key, value in locals().items() if value is not None and key not in ["actor_run_id", "actor_task_id", "actor_id"]
+        for key, value in locals().items() if value is not None and key not in ['actor_run_id', 'actor_task_id', 'actor_id']
     }
 
     condition = {}
@@ -35,7 +35,7 @@ def _prepare_webhook_representation(
         condition['actorId'] = actor_id
 
     if condition != {}:
-        webhook["condition"] = condition
+        webhook['condition'] = condition
 
     return webhook
 
@@ -113,5 +113,5 @@ class WebhookClient(ResourceClient):
             WebhookDispatchCollectionClient: A client allowing access to dispatches of this webhook using its list method
         """
         return WebhookDispatchCollectionClient(
-            **self._sub_resource_init_options(resource_path="dispatches"),
+            **self._sub_resource_init_options(resource_path='dispatches'),
         )

@@ -117,7 +117,7 @@ class RunClient(ActorJobBaseClient):
             DatasetClient: A client allowing access to the default dataset of this actor run.
         """
         return DatasetClient(
-            **self._sub_resource_init_options(resource_path="dataset"),
+            **self._sub_resource_init_options(resource_path='dataset'),
         )
 
     def key_value_store(self) -> KeyValueStoreClient:
@@ -129,7 +129,7 @@ class RunClient(ActorJobBaseClient):
             KeyValueStoreClient: A client allowing access to the default key-value store of this actor run.
         """
         return KeyValueStoreClient(
-            **self._sub_resource_init_options(resource_path="key-value-store"),
+            **self._sub_resource_init_options(resource_path='key-value-store'),
         )
 
     def request_queue(self) -> RequestQueueClient:
@@ -141,7 +141,7 @@ class RunClient(ActorJobBaseClient):
             RequestQueueClient: A client allowing access to the default request_queue of this actor run.
         """
         return RequestQueueClient(
-            **self._sub_resource_init_options(resource_path="request-queue"),
+            **self._sub_resource_init_options(resource_path='request-queue'),
         )
 
     def log(self) -> LogClient:
@@ -153,5 +153,5 @@ class RunClient(ActorJobBaseClient):
             LogClient: A client allowing access to the log of this actor run.
         """
         return LogClient(
-            **self._sub_resource_init_options(resource_path="log"),
+            **self._sub_resource_init_options(resource_path='log'),
         )

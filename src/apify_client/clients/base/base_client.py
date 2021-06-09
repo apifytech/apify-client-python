@@ -60,10 +60,10 @@ class BaseClient:
 
     def _sub_resource_init_options(self, **kwargs: Any) -> Dict:
         options = {
-            "base_url": self.url,
-            "http_client": self.http_client,
-            "params": self.params,
-            "root_client": self.root_client,
+            'base_url': self.url,
+            'http_client': self.http_client,
+            'params': self.params,
+            'root_client': self.root_client,
         }
 
         return {
