@@ -138,7 +138,7 @@ def _encode_webhook_list_to_base64(webhooks: List[Dict]) -> bytes:
     data = []
     for webhook in webhooks:
         webhook_representation = {
-            'eventTypes': webhook['event_types'],
+            'eventTypes': [event_type.value for event_type in webhook['event_types']],
             'requestUrl': webhook['request_url'],
         }
         if 'payload_template' in webhook:

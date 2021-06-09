@@ -1,13 +1,14 @@
 from typing import Any, Dict, List, Optional
 
 from ..._utils import _snake_case_to_camel_case
+from ...consts import WebhookEventType
 from ..base import ResourceClient
 from .webhook_dispatch_collection import WebhookDispatchCollectionClient
 
 
 def _prepare_webhook_representation(
     *,
-    event_types: Optional[List] = None,
+    event_types: Optional[List[WebhookEventType]] = None,
     request_url: Optional[str] = None,
     payload_template: Optional[str] = None,
     actor_id: Optional[str] = None,
@@ -21,7 +22,7 @@ def _prepare_webhook_representation(
     """Prepare webhook dictionary representation for clients."""
     webhook: Dict[str, Any] = {
         _snake_case_to_camel_case(key): value
-        for key, value in locals().items() if value is not None and key not in ['actor_run_id', 'actor_task_id', 'actor_id']
+        for key, value in locals().items() if value is not None and key not in ['event_types', 'actor_run_id', 'actor_task_id', 'actor_id']
     }
 
     condition = {}
@@ -36,6 +37,9 @@ def _prepare_webhook_representation(
 
     if condition != {}:
         webhook['condition'] = condition
+
+    if event_types is not None:
+        webhook['eventTypes'] = [event_type.value for event_type in event_types]
 
     return webhook
 
@@ -61,7 +65,7 @@ class WebhookClient(ResourceClient):
     def update(
         self,
         *,
-        event_types: Optional[List] = None,
+        event_types: Optional[List[WebhookEventType]] = None,
         request_url: Optional[str] = None,
         payload_template: Optional[str] = None,
         actor_id: Optional[str] = None,
@@ -76,8 +80,7 @@ class WebhookClient(ResourceClient):
         https://docs.apify.com/api/v2#/reference/webhooks/webhook-object/update-webhook
 
         Args:
-            event_types (list, optional): List of event types that should trigger the webhook.
-                                          Present in the client constants as WebhookEventType. At least one is required.
+            event_types (list of WebhookEventType, optional): List of event types that should trigger the webhook. At least one is required.
             request_url (str, optional): URL that will be invoked once the webhook is triggered.
             payload_template (str, optional): Specification of the payload that will be sent to request_url
             actor_id (str, optional): Id of the actor whose runs should trigger the webhook.

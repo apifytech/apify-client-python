@@ -580,7 +580,7 @@ Start the actor and immediately return the Run object.
   e.g. when the actor finished or failed.
   If you already have a webhook set up for the actor or task, you do not have to add it again here.
   Each webhook is represented by a dictionary containing these items:
-    * `event_types`: list of `WebhookEventType` values which trigger the webhook
+    * `event_types`: list of [`WebhookEventType`](#webhookeventtype) values which trigger the webhook
     * `request_url`: URL to which to send the webhook HTTP request
     * `payload_template` (optional): Optional template for the request payload
 
@@ -694,7 +694,7 @@ Last run is retrieved based on the start time of the runs.
 
 * **Parameters**
 
-  * **status** (`str`, *optional*) – Consider only runs with this status.
+  * **status** ([`ActorJobStatus`](#actorjobstatus), *optional*) – Consider only runs with this status.
 
 * **Returns**
 
@@ -871,25 +871,26 @@ Update the actor version with specified fields.
   * **apply_env_vars_to_build** (`bool`, *optional*) – Whether the environment variables specified for the actor run
   will also be set to the actor build process.
 
-  * **source_type** (`str`, *optional*) – What source type is the actor version using. Can be one of
-  SOURCE_CODE, SOURCE_FILES, GIT_REPO, TARBALL and GITHUB_GIST.
+  * **source_type** ([`ActorSourceType`](#actorsourcetype), *optional*) – What source type is the actor version using.
 
-  * **source_code** (`str`, *optional*) – Source code as a single JavaScript/Node.js file, using the base Docker image specified in baseDockerImage.
-  Required when source_type is SOURCE_CODE.
+  * **source_code** (`str`, *optional*) – Source code as a single JavaScript/Node.js file,
+  using the base Docker image specified in `baseDockerImage`.
+  Required when `source_type` is [`ActorSourceType.SOURCE_CODE`](#actorsourcetype-source_code).
 
-  * **base_docker_image** (`str`, *optional*) – The base Docker image to use for single-file actors. Required when source_type is SOURCE_CODE.
+  * **base_docker_image** (`str`, *optional*) – The base Docker image to use for single-file actors.
+  Required when `source_type` is [`ActorSourceType.SOURCE_CODE`](#actorsourcetype-source_code).
 
   * **source_files** (`list of dict`, *optional*) – Source code comprised of multiple files, each an item of the array.
-  Required when source_type is SOURCE_FILES. See the API docs for the exact structure.
+  Required when `source_type` is [`ActorSourceType.SOURCE_FILES`](#actorsourcetype-source_files). See the API docs for the exact structure.
 
   * **git_repo_url** (`str`, *optional*) – The URL of a Git repository from which the source code will be cloned.
-  Required when source_type is GIT_REPO.
+  Required when `source_type` is [`ActorSourceType.GIT_REPO`](#actorsourcetype-git_repo).
 
   * **tarball_url** (`str`, *optional*) – The URL of a tarball or a zip archive from which the source code will be downloaded.
-  Required when source_type is TARBALL.
+  Required when `source_type` is [`ActorSourceType.TARBALL`](#actorsourcetype-tarball).
 
   * **github_gist_url** (`str`, *optional*) – The URL of a GitHub Gist from which the source will be downloaded.
-  Required when source_type is GITHUB_GIST.
+  Required when `source_type` is [`ActorSourceType.GITHUB_GIST`](#actorsourcetype-github_gist).
 
 * **Returns**
 
@@ -946,7 +947,7 @@ Create a new actor version.
 
 * **Parameters**
 
-  * **version_number** (`str`) – Major and minor version of the actor (e.g. 1.0)
+  * **version_number** (`str`) – Major and minor version of the actor (e.g. `1.0`)
 
   * **build_tag** (`str`, *optional*) – Tag that is automatically set to the latest successful build of the current version.
 
@@ -956,25 +957,26 @@ Create a new actor version.
   * **apply_env_vars_to_build** (`bool`, *optional*) – Whether the environment variables specified for the actor run
   will also be set to the actor build process.
 
-  * **source_type** (`str`) – What source type is the actor version using. Can be one of
-  SOURCE_CODE, SOURCE_FILES, GIT_REPO, TARBALL and GITHUB_GIST.
+  * **source_type** ([`ActorSourceType`](#actorsourcetype)) – What source type is the actor version using.
 
-  * **source_code** (`str`, *optional*) – Source code as a single JavaScript/Node.js file, using the base Docker image specified in baseDockerImage.
-  Required when source_type is SOURCE_CODE.
+  * **source_code** (`str`, *optional*) – Source code as a single JavaScript/Node.js file,
+  using the base Docker image specified in `baseDockerImage`.
+  Required when `source_type` is [`ActorSourceType.SOURCE_CODE`](#actorsourcetype-source_code).
 
-  * **base_docker_image** (`str`, *optional*) – The base Docker image to use for single-file actors. Required when source_type is SOURCE_CODE.
+  * **base_docker_image** (`str`, *optional*) – The base Docker image to use for single-file actors.
+  Required when `source_type` is [`ActorSourceType.SOURCE_CODE`](#actorsourcetype-source_code).
 
   * **source_files** (`list of dict`, *optional*) – Source code comprised of multiple files, each an item of the array.
-  Required when source_type is SOURCE_FILES. See the API docs for the exact structure.
+  Required when `source_type` is [`ActorSourceType.SOURCE_FILES`](#actorsourcetype-source_files). See the API docs for the exact structure.
 
   * **git_repo_url** (`str`, *optional*) – The URL of a Git repository from which the source code will be cloned.
-  Required when source_type is GIT_REPO.
+  Required when `source_type` is [`ActorSourceType.GIT_REPO`](#actorsourcetype-git_repo).
 
   * **tarball_url** (`str`, *optional*) – The URL of a tarball or a zip archive from which the source code will be downloaded.
-  Required when source_type is TARBALL.
+  Required when `source_type` is [`ActorSourceType.TARBALL`](#actorsourcetype-tarball).
 
   * **github_gist_url** (`str`, *optional*) – The URL of a GitHub Gist from which the source will be downloaded.
-  Required when source_type is GITHUB_GIST.
+  Required when `source_type` is [`ActorSourceType.GITHUB_GIST`](#actorsourcetype-github_gist).
 
 * **Returns**
 
@@ -1187,7 +1189,7 @@ List all actor runs (either of a single actor, or all user’s actors, depending
 
   * **desc** (`bool`, *optional*) – Whether to sort the runs in descending order based on their start date
 
-  * **status** (`str`, *optional*) – Retrieve only runs with the provided status
+  * **status** ([`ActorJobStatus`](#actorjobstatus), *optional*) – Retrieve only runs with the provided status
 
 * **Returns**
 
@@ -2141,8 +2143,7 @@ Update the webhook.
 
 * **Parameters**
 
-  * **event_types** (`list`, *optional*) – List of event types that should trigger the webhook.
-  Present in the client constants as WebhookEventType. At least one is required.
+  * **event_types** ([`list of WebhookEventType`](#webhookeventtype), *optional*) – List of event types that should trigger the webhook. At least one is required.
 
   * **request_url** (`str`, *optional*) – URL that will be invoked once the webhook is triggered.
 
@@ -2243,8 +2244,7 @@ You have to specify exactly one out of actor_id, actor_task_id or actor_run_id.
 
 * **Parameters**
 
-  * **event_types** (`list`) – List of event types that should trigger the webhook.
-  Present in the client constants as WebhookEventType. At least one is required.
+  * **event_types** ([`list of WebhookEventType`](#webhookeventtype)) – List of event types that should trigger the webhook. At least one is required.
 
   * **request_url** (`str`) – URL that will be invoked once the webhook is triggered.
 
@@ -2434,7 +2434,7 @@ Start the task and immediately return the Run object.
   e.g. when the actor finished or failed.
   If you already have a webhook set up for the actor or task, you do not have to add it again here.
   Each webhook is represented by a dictionary containing these items:
-    * `event_types`: list of `WebhookEventType` values which trigger the webhook
+    * `event_types`: list of [`WebhookEventType`](#webhookeventtype) values which trigger the webhook
     * `request_url`: URL to which to send the webhook HTTP request
     * `payload_template` (optional): Optional template for the request payload
 
@@ -2534,7 +2534,7 @@ Last run is retrieved based on the start time of the runs.
 
 * **Parameters**
 
-  * **status** (`str`, *optional*) – Consider only runs with this status.
+  * **status** ([`ActorJobStatus`](#actorjobstatus), *optional*) – Consider only runs with this status.
 
 * **Returns**
 
@@ -2815,3 +2815,155 @@ Name | Type | Description
 `total` | `int` | Total number of objects matching the API call criteria
 
 ***
+
+### [](#actorjobstatus) ActorJobStatus
+
+Available statuses for actor jobs (runs or builds).
+
+* [READY](#actorjobstatus-ready)
+* [RUNNING](#actorjobstatus-running)
+* [SUCCEEDED](#actorjobstatus-succeeded)
+* [FAILED](#actorjobstatus-failed)
+* [TIMING\_OUT](#actorjobstatus-timing\_out)
+* [TIMED\_OUT](#actorjobstatus-timed\_out)
+* [ABORTING](#actorjobstatus-aborting)
+* [ABORTED](#actorjobstatus-aborted)
+
+***
+
+#### [](#actorjobstatus-ready) `ActorJobStatus.READY`
+
+Actor job initialized but not started yet
+
+***
+
+#### [](#actorjobstatus-running) `ActorJobStatus.RUNNING`
+
+Actor job in progress
+
+***
+
+#### [](#actorjobstatus-succeeded) `ActorJobStatus.SUCCEEDED`
+
+Actor job finished successfully
+
+***
+
+#### [](#actorjobstatus-failed) `ActorJobStatus.FAILED`
+
+Actor job or build failed
+
+***
+
+#### [](#actorjobstatus-timing_out) `ActorJobStatus.TIMING_OUT`
+
+Actor job currently timing out
+
+***
+
+#### [](#actorjobstatus-timed_out) `ActorJobStatus.TIMED_OUT`
+
+Actor job timed out
+
+***
+
+#### [](#actorjobstatus-aborting) `ActorJobStatus.ABORTING`
+
+Actor job currently being aborted by user
+
+***
+
+#### [](#actorjobstatus-aborted) `ActorJobStatus.ABORTED`
+
+Actor job aborted by user
+
+***
+
+### [](#actorsourcetype) ActorSourceType
+
+Available source types for actors.
+
+* [SOURCE\_CODE](#actorsourcetype-source\_code)
+* [SOURCE\_FILES](#actorsourcetype-source\_files)
+* [GIT\_REPO](#actorsourcetype-git\_repo)
+* [TARBALL](#actorsourcetype-tarball)
+* [GITHUB\_GIST](#actorsourcetype-github\_gist)
+
+***
+
+#### [](#actorsourcetype-source_code) `ActorSourceType.SOURCE_CODE`
+
+Actor source code is a single JavaScript/Node.js file
+
+***
+
+#### [](#actorsourcetype-source_files) `ActorSourceType.SOURCE_FILES`
+
+Actor source code is comprised of multiple files
+
+***
+
+#### [](#actorsourcetype-git_repo) `ActorSourceType.GIT_REPO`
+
+Actor source code is cloned from a Git repository
+
+***
+
+#### [](#actorsourcetype-tarball) `ActorSourceType.TARBALL`
+
+Actor source code is downloaded using a tarball or Zip file
+
+***
+
+#### [](#actorsourcetype-github_gist) `ActorSourceType.GITHUB_GIST`
+
+Actor source code is taken from a GitHub Gist
+
+***
+
+### [](#webhookeventtype) WebhookEventType
+
+Events that can trigger a webhook.
+
+* [ACTOR\_RUN\_CREATED](#webhookeventtype-actor\_run\_created)
+* [ACTOR\_RUN\_SUCCEEDED](#webhookeventtype-actor\_run\_succeeded)
+* [ACTOR\_RUN\_FAILED](#webhookeventtype-actor\_run\_failed)
+* [ACTOR\_RUN\_TIMED\_OUT](#webhookeventtype-actor\_run\_timed\_out)
+* [ACTOR\_RUN\_ABORTED](#webhookeventtype-actor\_run\_aborted)
+* [ACTOR\_RUN\_RESURRECTED](#webhookeventtype-actor\_run\_resurrected)
+
+***
+
+#### [](#webhookeventtype-actor_run_created) `WebhookEventType.ACTOR_RUN_CREATED`
+
+The actor run was created
+
+***
+
+#### [](#webhookeventtype-actor_run_succeeded) `WebhookEventType.ACTOR_RUN_SUCCEEDED`
+
+The actor run has succeeded
+
+***
+
+#### [](#webhookeventtype-actor_run_failed) `WebhookEventType.ACTOR_RUN_FAILED`
+
+The actor run has failed
+
+***
+
+#### [](#webhookeventtype-actor_run_timed_out) `WebhookEventType.ACTOR_RUN_TIMED_OUT`
+
+The actor run has timed out
+
+***
+
+#### [](#webhookeventtype-actor_run_aborted) `WebhookEventType.ACTOR_RUN_ABORTED`
+
+The actor run was aborted
+
+***
+
+#### [](#webhookeventtype-actor_run_resurrected) `WebhookEventType.ACTOR_RUN_RESURRECTED`
+
+The actor run was resurrected

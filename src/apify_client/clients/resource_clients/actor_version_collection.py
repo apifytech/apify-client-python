@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional
 
-from ..._consts import ActorSourceType
 from ..._utils import ListPage
+from ...consts import ActorSourceType
 from ..base import ResourceCollectionClient
 
 
@@ -43,25 +43,26 @@ class ActorVersionCollectionClient(ResourceCollectionClient):
         https://docs.apify.com/api/v2#/reference/actors/version-collection/create-version
 
         Args:
-            version_number (str): Major and minor version of the actor (e.g. `1.0`)
+            version_number (str): Major and minor version of the actor (e.g. ``1.0``)
             build_tag (str, optional): Tag that is automatically set to the latest successful build of the current version.
             env_vars (list of dict, optional): Environment variables that will be available to the actor run process,
                 and optionally also to the build process. See the API docs for their exact structure.
             apply_env_vars_to_build (bool, optional): Whether the environment variables specified for the actor run
                 will also be set to the actor build process.
-            source_type (str): What source type is the actor version using. Can be one of
-                `SOURCE_CODE`, `SOURCE_FILES`, `GIT_REPO`, `TARBALL` and `GITHUB_GIST`.
-            source_code (str, optional): Source code as a single JavaScript/Node.js file, using the base Docker image specified in `baseDockerImage`.
-                Required when `source_type` is `SOURCE_CODE`.
-            base_docker_image (str, optional): The base Docker image to use for single-file actors. Required when `source_type` is `SOURCE_CODE`.
+            source_type (ActorSourceType): What source type is the actor version using.
+            source_code (str, optional): Source code as a single JavaScript/Node.js file,
+                using the base Docker image specified in ``baseDockerImage``.
+                Required when ``source_type`` is ``ActorSourceType.SOURCE_CODE``.
+            base_docker_image (str, optional): The base Docker image to use for single-file actors.
+                Required when ``source_type`` is ``ActorSourceType.SOURCE_CODE``.
             source_files (list of dict, optional): Source code comprised of multiple files, each an item of the array.
-                Required when `source_type` is `SOURCE_FILES`. See the API docs for the exact structure.
+                Required when ``source_type`` is ``ActorSourceType.SOURCE_FILES``. See the API docs for the exact structure.
             git_repo_url (str, optional): The URL of a Git repository from which the source code will be cloned.
-                Required when `source_type` is `GIT_REPO`.
+                Required when ``source_type`` is ``ActorSourceType.GIT_REPO``.
             tarball_url (str, optional): The URL of a tarball or a zip archive from which the source code will be downloaded.
-                Required when `source_type` is `TARBALL`.
+                Required when ``source_type`` is ``ActorSourceType.TARBALL``.
             github_gist_url (str, optional): The URL of a GitHub Gist from which the source will be downloaded.
-                Required when `source_type` is `GITHUB_GIST`.
+                Required when ``source_type`` is ``ActorSourceType.GITHUB_GIST``.
 
         Returns:
             dict: The created actor version
@@ -76,7 +77,7 @@ class ActorVersionCollectionClient(ResourceCollectionClient):
         if apply_env_vars_to_build is not None:
             version_fields['applyEnvVarsToBuild'] = apply_env_vars_to_build
         if source_type is not None:
-            version_fields['sourceType'] = source_type
+            version_fields['sourceType'] = source_type.value
         if source_code is not None:
             version_fields['sourceCode'] = source_code
         if base_docker_image is not None:

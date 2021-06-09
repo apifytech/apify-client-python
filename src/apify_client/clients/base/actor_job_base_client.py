@@ -3,9 +3,9 @@ import time
 from datetime import datetime
 from typing import Dict, Optional
 
-from ..._consts import TERMINAL_ACTOR_JOB_STATUSES, ActorJobStatus
 from ..._errors import ApifyApiError
 from ..._utils import _catch_not_found_or_throw, _parse_date_fields, _pluck_data
+from ...consts import ActorJobStatus
 from .resource_client import ResourceClient
 
 DEFAULT_WAIT_FOR_FINISH_SEC = 999999
@@ -38,7 +38,7 @@ class ActorJobBaseClient(ResourceClient):
 
                 seconds_elapsed = math.floor(((datetime.now() - started_at).total_seconds()))
                 if (
-                    ActorJobStatus(job['status']) in TERMINAL_ACTOR_JOB_STATUSES or (wait_secs is not None and seconds_elapsed >= wait_secs)
+                    ActorJobStatus(job['status'])._is_terminal or (wait_secs is not None and seconds_elapsed >= wait_secs)
                 ):
                     should_repeat = False
 

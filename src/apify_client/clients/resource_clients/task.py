@@ -1,8 +1,8 @@
 from typing import Any, Dict, List, Optional, cast
 
-from ..._consts import ActorJobStatus
 from ..._errors import ApifyApiError
 from ..._utils import _catch_not_found_or_throw, _encode_webhook_list_to_base64, _filter_out_none_values_recursively, _parse_date_fields, _pluck_data
+from ...consts import ActorJobStatus
 from ..base import ResourceClient
 from .run import RunClient
 from .run_collection import RunCollectionClient
@@ -210,7 +210,7 @@ class TaskClient(ResourceClient):
         Last run is retrieved based on the start time of the runs.
 
         Args:
-            status (str, optional): Consider only runs with this status.
+            status (ActorJobStatus, optional): Consider only runs with this status.
 
         Returns:
             RunClient: The resource client for the last run of this task.
@@ -218,7 +218,7 @@ class TaskClient(ResourceClient):
         return RunClient(**self._sub_resource_init_options(
             resource_id='last',
             resource_path='runs',
-            params=self._params(status=status),
+            params=self._params(status=status.value if status is not None else None),
         ))
 
     def webhooks(self) -> WebhookCollectionClient:

@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
-from ..._consts import ActorJobStatus
 from ..._utils import ListPage
+from ...consts import ActorJobStatus
 from ..base import ResourceCollectionClient
 
 
@@ -30,9 +30,14 @@ class RunCollectionClient(ResourceCollectionClient):
             limit (int, optional): How many runs to retrieve
             offset (int, optional): What run to include as first when retrieving the list
             desc (bool, optional): Whether to sort the runs in descending order based on their start date
-            status (str, optional): Retrieve only runs with the provided status
+            status (ActorJobStatus, optional): Retrieve only runs with the provided status
 
         Returns:
             ListPage: The retrieved actor runs
         """
-        return self._list(limit=limit, offset=offset, desc=desc, status=status)
+        return self._list(
+            limit=limit,
+            offset=offset,
+            desc=desc,
+            status=status.value if status is not None else None,
+        )
