@@ -61,14 +61,14 @@ class TaskCollectionClient(ResourceCollectionClient):
             dict: The created task.
         """
         new_fields = {
-            "actId": actor_id,
-            "name": name,
-            "options": {
-                "build": build,
-                "memoryMbytes": memory_mbytes,
-                "timeoutSecs": timeout_secs,
+            'actId': actor_id,
+            'name': name,
+            'options': {
+                'build': build,
+                'memoryMbytes': memory_mbytes,
+                'timeoutSecs': timeout_secs,
             },
-            "input": task_input,
+            'input': task_input,
         }
 
         return self._create(_filter_out_none_values_recursively(new_fields))
