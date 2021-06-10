@@ -4,6 +4,11 @@ Changelog
 [0.1.0](../../releases/tag/v0.1.0) - 2021-06-11
 -----------------------------------------------
 
+### Changed
+
+- methods using specific option values for arguments now use well-defined and documented `Enum`s for those arguments instead of generic strings
+- made the submodule `apify_client.consts` containing those `Enum`s available
+
 ### Internal changes
 
 - updated development dependencies

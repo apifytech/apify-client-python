@@ -1,5 +1,7 @@
 from typing import Any, Dict, List, Optional
 
+from apify_client.consts import WebhookEventType
+
 from ..._utils import ListPage
 from ..base import ResourceCollectionClient
 from .webhook import _prepare_webhook_representation
@@ -37,7 +39,7 @@ class WebhookCollectionClient(ResourceCollectionClient):
     def create(
         self,
         *,
-        event_types: List,
+        event_types: List[WebhookEventType],
         request_url: str,
         payload_template: Optional[str] = None,
         actor_id: Optional[str] = None,
@@ -55,8 +57,7 @@ class WebhookCollectionClient(ResourceCollectionClient):
         https://docs.apify.com/api/v2#/reference/webhooks/webhook-collection/create-webhook
 
         Args:
-            event_types (list): List of event types that should trigger the webhook.
-                                Present in the client constants as WebhookEventType. At least one is required.
+            event_types (list of WebhookEventType): List of event types that should trigger the webhook. At least one is required.
             request_url (str): URL that will be invoked once the webhook is triggered.
             payload_template (str, optional): Specification of the payload that will be sent to request_url
             actor_id (str, optional): Id of the actor whose runs should trigger the webhook.

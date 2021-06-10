@@ -15,6 +15,7 @@ from apify_client._utils import (
     _retry_with_exp_backoff,
     _to_safe_id,
 )
+from apify_client.consts import WebhookEventType
 
 
 class UtilsTest(unittest.TestCase):
@@ -155,11 +156,11 @@ class UtilsTest(unittest.TestCase):
         self.assertEqual(
             _encode_webhook_list_to_base64([
                 {
-                    'event_types': ['ACTOR.RUN.CREATED'],
+                    'event_types': [WebhookEventType.ACTOR_RUN_CREATED],
                     'request_url': 'https://example.com/run-created',
                 },
                 {
-                    'event_types': ['ACTOR.RUN.SUCCEEDED'],
+                    'event_types': [WebhookEventType.ACTOR_RUN_SUCCEEDED],
                     'request_url': 'https://example.com/run-succeeded',
                     'payload_template': '{"hello": "world", "resource":{{resource}}}',
                 },

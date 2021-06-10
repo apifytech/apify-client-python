@@ -1,7 +1,7 @@
 from typing import Any, Dict, List, Optional
 
-from ..._consts import ActorJobStatus
 from ..._utils import _encode_key_value_store_record_value, _encode_webhook_list_to_base64, _parse_date_fields, _pluck_data
+from ...consts import ActorJobStatus
 from ..base import ResourceClient
 from .actor_version import ActorVersionClient
 from .actor_version_collection import ActorVersionCollectionClient
@@ -286,7 +286,7 @@ class ActorClient(ResourceClient):
         Last run is retrieved based on the start time of the runs.
 
         Args:
-            status (str, optional): Consider only runs with this status.
+            status (ActorJobStatus, optional): Consider only runs with this status.
 
         Returns:
             RunClient: The resource client for the last run of this actor.
@@ -294,7 +294,7 @@ class ActorClient(ResourceClient):
         return RunClient(**self._sub_resource_init_options(
             resource_id='last',
             resource_path='runs',
-            params=self._params(status=status),
+            params=self._params(status=status.value if status is not None else None),
         ))
 
     def versions(self) -> ActorVersionCollectionClient:
