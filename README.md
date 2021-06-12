@@ -12,7 +12,7 @@ To do that, simply run `pip install apify-client` in your terminal.
 
 ## Usage
 
-For usage instructions, check the documentation on [Apify Docs](https://docs.apify.com/apify-client-python) or in [`docs/docs.md`](.docs/docs.md).
+For usage instructions, check the documentation on [Apify Docs](https://docs.apify.com/apify-client-python) or in [`docs/docs.md`](docs/docs.md).
 
 ## Development
 
